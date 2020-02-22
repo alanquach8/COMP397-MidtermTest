@@ -16,7 +16,6 @@ var scenes;
 (function (scenes) {
     var Play = /** @class */ (function (_super) {
         __extends(Play, _super);
-        // PRIVATE INSTANCE MEMBERS
         // PUBLIC PROPERTIES
         // CONSTRUCTOR
         function Play() {
@@ -28,6 +27,16 @@ var scenes;
         // PUBLIC METHODS
         //initialize and instatiate
         Play.prototype.Start = function () {
+            this.dice1 = new objects.Dice(config.Game.ASSETS.getResult("blank"), 75, 100, false);
+            this.dice2 = new objects.Dice(config.Game.ASSETS.getResult("blank"), 375, 100, false);
+            this.result1 = new objects.Label("R1: ", "35px", "Consolas", "#000000", 90, 300, false);
+            this.result2 = new objects.Label("R2: ", "35px", "Consolas", "#000000", 400, 300, false);
+            this.rollButton = new objects.Button(config.Game.ASSETS.getResult("rollButton"), 0, 0, false);
+            this.addChild(this.dice1);
+            this.addChild(this.dice2);
+            this.addChild(this.result1);
+            this.addChild(this.result2);
+            this.addChild(this.rollButton);
             this.Main();
         };
         Play.prototype.Update = function () {

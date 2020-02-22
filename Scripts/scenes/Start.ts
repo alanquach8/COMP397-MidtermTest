@@ -28,7 +28,7 @@ module scenes
             this._welcomeLabel = new objects.Label("COMP397 - Midterm Test", "40px", "Consolas", "#000000", 320, 180, true);
             // buttons
              this._startButton = new objects.Button(config.Game.ASSETS.getResult("startButton"), 320, 430, true);
-             this._bonusButton = new objects.Button(config.Game.ASSETS.getResult("startButton"), 0, 0, false);
+             this._bonusButton = new objects.Button(config.Game.ASSETS.getResult("bonusButton"), 320, 300, true);
 
 
             this.Main();

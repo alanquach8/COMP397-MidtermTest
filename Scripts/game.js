@@ -23,7 +23,8 @@ var Game = (function () {
         { id: "4", src: "./Assets/images/4.png" },
         { id: "5", src: "./Assets/images/5.png" },
         { id: "6", src: "./Assets/images/6.png" },
-        { id: "rollButton", src: "./Assets/images/rollButton.png" }
+        { id: "rollButton", src: "./Assets/images/rollButton.png" },
+        { id: "bonusButton", src: "./Assets/images/bonusButton.png" }
     ];
     function Preload() {
         assets = new createjs.LoadQueue(); // asset container

@@ -18,6 +18,8 @@ module scenes
 
         private results:number[] = [0, 0]; // results of the roll
 
+        private bonusButton:objects.Button;
+
 
         // PUBLIC PROPERTIES
 
@@ -50,6 +52,8 @@ module scenes
             this.result1 = new objects.Label("","35px","Consolas", "#FFFF00", 160, 305, false);
             this.result2 = new objects.Label("","35px","Consolas", "#FFFF00", 470, 305, false);
             this.rollButton = new objects.Button(config.Game.ASSETS.getResult("rollButton"), 320, 430, true);
+
+            this.bonusButton = new objects.Button(config.Game.ASSETS.getResult("bonusButton"), 500, 430, true);
 
             this.isRolling = false;
             this.rollAnimation = 0;
@@ -111,11 +115,16 @@ module scenes
                 this.rollAnimation = 0;
             });
 
+            this.bonusButton.on("click", () => {
+                config.Game.SCENE = scenes.State.BONUS;
+            });
+
             this.addChild(this.dice[0]);
             this.addChild(this.dice[1]);
             this.addChild(this.result1);
             this.addChild(this.result2);
             this.addChild(this.rollButton);
+            this.addChild(this.bonusButton);
         }
 
         

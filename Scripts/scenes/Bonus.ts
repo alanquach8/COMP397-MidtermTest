@@ -21,6 +21,7 @@ module scenes
 
         private results:number[] = [0, 0, 0, 0];
 
+        private backButton:objects.Button;
 
         // PUBLIC PROPERTIES
 
@@ -55,6 +56,8 @@ module scenes
             this.dice[3] = new objects.Dice(config.Game.ASSETS.getResult("blank"), 0, 200, false);
             this.result = new objects.Label("Result: ","35px","Consolas", "#FFFF00", 200, 305, false);
             this.rollButton = new objects.Button(config.Game.ASSETS.getResult("rollButton"), 320, 430, true);
+
+            this.backButton = new objects.Button(config.Game.ASSETS.getResult("backButton"), 500, 430, true);
 
             this.isRolling = false;
             this.rollAnimation = 0;
@@ -137,12 +140,17 @@ module scenes
                 this.rollAnimation = 0;
             });
 
+            this.backButton.on("click", () => {
+                config.Game.SCENE = scenes.State.PLAY;
+            });
+
             this.addChild(this.dice[0]);
             this.addChild(this.dice[1]);
             this.addChild(this.dice[2]);
             this.addChild(this.dice[3]);
             this.addChild(this.result);
             this.addChild(this.rollButton);
+            this.addChild(this.backButton);
         }
 
         

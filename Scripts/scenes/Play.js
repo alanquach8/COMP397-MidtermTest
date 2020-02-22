@@ -20,56 +20,61 @@ var scenes;
         // CONSTRUCTOR
         function Play() {
             var _this = _super.call(this) || this;
-            _this.results = [0, 0];
+            _this.dice = [
+                new objects.Dice(),
+                new objects.Dice()
+            ];
+            _this.results = [0, 0]; // results of the roll
             _this.Start();
             return _this;
         }
         // PRIVATE METHODS
         // PUBLIC METHODS
         //initialize and instatiate
+        /**
+         * Start function to initialize objects
+         * AUthor: Alan Quach
+         * Date: 02-22-2020
+         * @memberof Play
+         */
         Play.prototype.Start = function () {
-            var _this = this;
             this.background = new createjs.Bitmap("./Assets/images/dicebackground.png");
             this.addChild(this.background);
-            this.dice1 = new objects.Dice(config.Game.ASSETS.getResult("blank"), 75, 100, false);
-            this.dice2 = new objects.Dice(config.Game.ASSETS.getResult("blank"), 375, 100, false);
+            this.dice[0] = new objects.Dice(config.Game.ASSETS.getResult("blank"), 75, 100, false);
+            this.dice[1] = new objects.Dice(config.Game.ASSETS.getResult("blank"), 375, 100, false);
             this.result1 = new objects.Label("", "35px", "Consolas", "#FFFF00", 160, 305, false);
             this.result2 = new objects.Label("", "35px", "Consolas", "#FFFF00", 470, 305, false);
             this.rollButton = new objects.Button(config.Game.ASSETS.getResult("rollButton"), 320, 430, true);
-            this.rollButton.on("click", function () {
-                _this.isRolling = true;
-                _this.rollAnimation = 0;
-            });
-            this.addChild(this.dice1);
-            this.addChild(this.dice2);
-            this.addChild(this.result1);
-            this.addChild(this.result2);
-            this.addChild(this.rollButton);
             this.isRolling = false;
             this.rollAnimation = 0;
             this.Main();
         };
+        /**
+         * Update function to show rolling animation and results of the roll
+         * Author: Alan Quach
+         * Date: 02-22-2020
+         * @memberof Play
+         */
         Play.prototype.Update = function () {
             if (this.isRolling) {
                 if (this.rollAnimation < 25) {
-                    this.removeChild(this.dice1);
-                    this.removeChild(this.dice2);
-                    this.dice1 = new objects.Dice(config.Game.ASSETS.getResult(Math.floor((Math.random() * 6) + 1).toString()), 75, 100, false);
-                    this.dice2 = new objects.Dice(config.Game.ASSETS.getResult(Math.floor((Math.random() * 6) + 1).toString()), 375, 100, false);
-                    this.addChild(this.dice1);
-                    this.addChild(this.dice2);
+                    this.removeChild(this.dice[0]);
+                    this.removeChild(this.dice[1]);
+                    this.dice[0] = new objects.Dice(config.Game.ASSETS.getResult(Math.floor((Math.random() * 6) + 1).toString()), 75, 100, false);
+                    this.dice[1] = new objects.Dice(config.Game.ASSETS.getResult(Math.floor((Math.random() * 6) + 1).toString()), 375, 100, false);
+                    this.addChild(this.dice[0]);
+                    this.addChild(this.dice[1]);
                     this.rollAnimation++;
                 }
                 else {
-                    console.log("HERE");
                     this.results[0] = Math.floor((Math.random() * 6) + 1);
                     this.results[1] = Math.floor((Math.random() * 6) + 1);
-                    this.removeChild(this.dice1);
-                    this.removeChild(this.dice2);
-                    this.dice1 = new objects.Dice(config.Game.ASSETS.getResult(this.results[0].toString()), 75, 100, false);
-                    this.dice2 = new objects.Dice(config.Game.ASSETS.getResult(this.results[1].toString()), 375, 100, false);
-                    this.addChild(this.dice1);
-                    this.addChild(this.dice2);
+                    this.removeChild(this.dice[0]);
+                    this.removeChild(this.dice[1]);
+                    this.dice[0] = new objects.Dice(config.Game.ASSETS.getResult(this.results[0].toString()), 75, 100, false);
+                    this.dice[1] = new objects.Dice(config.Game.ASSETS.getResult(this.results[1].toString()), 375, 100, false);
+                    this.addChild(this.dice[0]);
+                    this.addChild(this.dice[1]);
                     this.removeChild(this.result1);
                     this.removeChild(this.result2);
                     this.result1 = new objects.Label(this.results[0].toString(), "35px", "Consolas", "#FFFF00", 160, 305, false);
@@ -80,7 +85,23 @@ var scenes;
                 }
             }
         };
+        /**
+         * Main function to add listeners and objects to scene
+         * Aurthor: Alan Quach
+         * Date: 02-22-2020
+         * @memberof Play
+         */
         Play.prototype.Main = function () {
+            var _this = this;
+            this.rollButton.on("click", function () {
+                _this.isRolling = true;
+                _this.rollAnimation = 0;
+            });
+            this.addChild(this.dice[0]);
+            this.addChild(this.dice[1]);
+            this.addChild(this.result1);
+            this.addChild(this.result2);
+            this.addChild(this.rollButton);
         };
         return Play;
     }(objects.Scene));

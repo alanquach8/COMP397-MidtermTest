@@ -105,6 +105,11 @@ let Game = (function(){
                 console.log("switch to End Scene");
                 currentScene = new scenes.End(); 
                 break;
+            case scenes.State.BONUS:
+                console.log("switch to Bonus Scene");
+                currentScene = new scenes.Bonus(); 
+                break;
+
         }
 
         currentSceneState = config.Game.SCENE;

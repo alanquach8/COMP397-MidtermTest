@@ -3,6 +3,8 @@ module scenes
     export class Play extends objects.Scene
     {
         // PRIVATE INSTANCE MEMBERS
+        private background:createjs.Bitmap;
+
         private dice1:objects.Dice;
         private dice2:objects.Dice;
         private result1:objects.Label;
@@ -32,10 +34,13 @@ module scenes
         //initialize and instatiate
         public Start(): void 
         {
+            this.background = new createjs.Bitmap("./Assets/images/dicebackground.png");
+            this.addChild(this.background);
+
             this.dice1 = new objects.Dice(config.Game.ASSETS.getResult("blank"), 75, 100, false);
             this.dice2 = new objects.Dice(config.Game.ASSETS.getResult("blank"), 375, 100, false);
-            this.result1 = new objects.Label("","35px","Consolas", "#000000", 160, 305, false);
-            this.result2 = new objects.Label("","35px","Consolas", "#000000", 470, 305, false);
+            this.result1 = new objects.Label("","35px","Consolas", "#FFFF00", 160, 305, false);
+            this.result2 = new objects.Label("","35px","Consolas", "#FFFF00", 470, 305, false);
             this.rollButton = new objects.Button(config.Game.ASSETS.getResult("rollButton"), 320, 430, true);
             this.rollButton.on("click", () => {
                 this.isRolling = true;
@@ -81,8 +86,8 @@ module scenes
     
                     this.removeChild(this.result1);
                     this.removeChild(this.result2);
-                    this.result1 = new objects.Label(this.results[0].toString(),"35px","Consolas", "#000000", 160, 305, false);
-                    this.result2 = new objects.Label(this.results[1].toString(),"35px","Consolas", "#000000", 470, 305, false);
+                    this.result1 = new objects.Label(this.results[0].toString(),"35px","Consolas", "#FFFF00", 160, 305, false);
+                    this.result2 = new objects.Label(this.results[1].toString(),"35px","Consolas", "#FFFF00", 470, 305, false);
                     this.addChild(this.result1);
                     this.addChild(this.result2);
 
